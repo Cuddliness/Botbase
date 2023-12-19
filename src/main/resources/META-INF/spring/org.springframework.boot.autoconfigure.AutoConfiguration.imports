@@ -1,0 +1,4 @@
+care.cuddliness.stacy.autoconfig.DiscordCommandAutoConfiguration
+care.cuddliness.stacy.autoconfig.JdaAutoConfiguration
+care.cuddliness.stacy.autoconfig.JdaEventPublisherAutoConfiguration
+care.cuddliness.stacy.autoconfig.ListenerAdapterAutoConfiguration
