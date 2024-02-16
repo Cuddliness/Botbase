@@ -2,10 +2,7 @@ package care.cuddliness.stacy.command;
 
 import care.cuddliness.stacy.command.annotation.StacyCommandOption;
 import care.cuddliness.stacy.command.data.StacyCommandInterface;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
-import net.dv8tion.jda.api.interactions.commands.build.Commands;
-import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
-import net.dv8tion.jda.api.interactions.commands.build.SubcommandData;
+import net.dv8tion.jda.api.interactions.commands.build.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -28,16 +25,32 @@ public record StacyCommand(@NotNull StacyCommandInterface command, Map<String, S
     public CommandData createCommandData() {
         Map<String, StacySubCommand> map = new HashMap<>();
         List<SubcommandData> cmddata = new ArrayList<>();
+        List<SubcommandGroupData> subCommandGroups = new ArrayList<>();
         SlashCommandData commandData = Commands.slash(name, name);
+
         for (StacySubCommand subCommand : subCommands.values()) {
+            if(subCommandGroups.stream().noneMatch(subcommandGroupData -> subcommandGroupData.getName().equalsIgnoreCase(subCommand.SubCommandGroup()))){
+                if(!subCommand.SubCommandGroup().equalsIgnoreCase("")) {
+                    subCommandGroups.add(new SubcommandGroupData(subCommand.SubCommandGroup(), "Bwah"));
+                }
+            }
+
             SubcommandData data = new SubcommandData(subCommand.subCommandId(), "HII");
 
+            for(SubcommandGroupData groupData : subCommandGroups){
+                if(groupData.getName().equalsIgnoreCase(subCommand.SubCommandGroup())){
+                    groupData.addSubcommands(data);
+                }
+            }
             subCommand.options().forEach(option -> data.addOption(option.t(), option.name(), option.descrip(),
-                    false, option.auto()));
-            cmddata.add(data);
+                    option.required(), option.auto()));
+            if(subCommand.SubCommandGroup().equalsIgnoreCase("")) {
+                cmddata.add(data);
+            }
             map.putIfAbsent(subCommand.subCommandId(), subCommand);
 
         }
+        commandData.addSubcommandGroups(subCommandGroups);
         commandData.addSubcommands(cmddata);
         this.subCommands.putAll(map);
         return commandData;

@@ -1,20 +1,18 @@
 package care.cuddliness.stacy.listeners;
 
-import care.cuddliness.stacy.entities.StacyUser;
-import care.cuddliness.stacy.entities.StacyGuildId;
-import care.cuddliness.stacy.interfaces.UserRepositoryInterface;
+import care.cuddliness.stacy.entities.user.StacyUser;
+import care.cuddliness.stacy.entities.guild.StacyGuildId;
+import care.cuddliness.stacy.repositories.UserRepository;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class MemberJoinGuildListener extends ListenerAdapter {
     @Autowired
-    private UserRepositoryInterface userRepository ;
+    private UserRepository userRepository ;
 
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event){

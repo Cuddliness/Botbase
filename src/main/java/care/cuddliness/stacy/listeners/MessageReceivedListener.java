@@ -1,7 +1,7 @@
 package care.cuddliness.stacy.listeners;
 
-import care.cuddliness.stacy.entities.StacyUser;
-import care.cuddliness.stacy.interfaces.UserRepositoryInterface;
+import care.cuddliness.stacy.entities.user.StacyUser;
+import care.cuddliness.stacy.repositories.UserRepository;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageReceivedListener extends ListenerAdapter {
     @Autowired
-    UserRepositoryInterface userRepository;
+    UserRepository userRepository;
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {

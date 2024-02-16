@@ -13,7 +13,6 @@ public class ListenerAdapterAutoConfiguration {
     public ListenerAdapterAutoConfiguration(@NotNull ListenerAdapter[] listenerAdapters, JDA jda) {
 
         for (ListenerAdapter listenerAdapter : listenerAdapters) {
-            System.out.println(listenerAdapter.getClass());
             jda.addEventListener(listenerAdapter);
         }
     }

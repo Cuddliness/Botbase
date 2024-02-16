@@ -15,6 +15,7 @@ public @interface StacyCommandOption {
     @NotNull String name();
     @NotNull String descrip();
     @NotNull OptionType t();
+    boolean required() default false;
     boolean auto() default false;
 
 

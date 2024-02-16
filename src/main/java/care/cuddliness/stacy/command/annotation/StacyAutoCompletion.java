@@ -1,6 +1,5 @@
 package care.cuddliness.stacy.command.annotation;
 
-import net.dv8tion.jda.api.entities.Role;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.ElementType;
