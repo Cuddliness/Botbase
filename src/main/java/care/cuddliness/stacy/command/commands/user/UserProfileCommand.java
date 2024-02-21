@@ -18,7 +18,7 @@ public class UserProfileCommand implements StacyCommandInterface {
 
     @Override
     public void onExecute(@NotNull Member sender, @NotNull SlashCommandInteractionEvent event) {
-        StacyUser user = userRepository.findByUserIdAndGuildIdGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
+        StacyUser user = userRepository.findByUserIdAndGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
         EmbedUtil embed = new EmbedUtil(EmbedColor.PRIMARY)
                 .setThumbnail(event.getUser().getEffectiveAvatarUrl())
                 .setTitle("Profile card of " + event.getUser().getName() + " |  " + event.getGuild().getName())

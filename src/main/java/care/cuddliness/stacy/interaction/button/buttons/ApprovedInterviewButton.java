@@ -23,6 +23,7 @@ import java.util.Objects;
 @StacyButtonComponent(name = "approve_interview", style = ButtonStyle.SUCCESS)
 
 public class ApprovedInterviewButton implements ButtonExecutorInterface {
+
     @Autowired
     GuildChannelsRepository repository;
     @Autowired
@@ -37,7 +38,7 @@ public class ApprovedInterviewButton implements ButtonExecutorInterface {
                 replace("<", "").replace("@", "")
                 .replace(">", ""));
 
-        StacyUser user = userRepository.findByUserIdAndGuildIdGuildId(parsedLong, event.getGuild().getIdLong());
+        StacyUser user = userRepository.findByUserIdAndGuildId(parsedLong, event.getGuild().getIdLong());
         user.setApplicationId(event.getMessageIdLong());
         event.getGuild().addRoleToMember(Objects.requireNonNull(event.getGuild().getMemberById(parsedLong)),
                 RoleValues.INTERVIEWED.getRole(repository, event.getGuild())).queue();

@@ -18,7 +18,7 @@ public class MessageReceivedListener extends ListenerAdapter {
         if(event.getMessage().getContentRaw().split(" ").length < 3){
             return;
         }
-        StacyUser user = userRepository.findByUserIdAndGuildIdGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
+        StacyUser user = userRepository.findByUserIdAndGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
         user.setMessageCount(user.getMessageCount() + 1);
         userRepository.save(user);
 

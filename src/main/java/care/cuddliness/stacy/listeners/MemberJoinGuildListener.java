@@ -9,6 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class MemberJoinGuildListener extends ListenerAdapter {
     @Autowired
@@ -17,20 +19,12 @@ public class MemberJoinGuildListener extends ListenerAdapter {
     @Override
     public void onGuildMemberJoin(@NotNull GuildMemberJoinEvent event){
 
-        StacyUser stacyUser = userRepository.findByUserIdAndGuildIdGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
+        StacyUser stacyUser = userRepository.findByUserIdAndGuildId(event.getMember().getIdLong(), event.getGuild().getIdLong());
 
-
-        // Check if member exists
+        // Check if member exists otherwise insert
         if(stacyUser == null){
-            StacyUser user =  new StacyUser();
-            StacyGuildId stacyUserId = new StacyGuildId();
-
-            stacyUserId.setGuildId(event.getGuild().getIdLong());
-
-            user.setUserId(event.getMember().getIdLong());
-            user.setGuildId(stacyUserId);
-
-            userRepository.save(user);
+            userRepository.saveUserIfNotExists(UUID.randomUUID(), event.getMember().getIdLong(), event.getGuild()
+                    .getIdLong());
         }
 
 

@@ -99,18 +99,7 @@ public class ReadyEvents {
             // Dirty check if new members are available when possible downtime happened
             for (Member m : g.getMembers()) {
                 if (!m.getUser().isBot() && !m.getUser().isSystem()) {
-                    StacyUser stacyUser = userRepository.findByUserIdAndGuildIdGuildId(m.getUser().getIdLong(), g.getIdLong());
-                    if (stacyUser == null) {
-                        System.out.println("Found new user: " + m.getEffectiveName());
-                        StacyUser user = new StacyUser();
-                        user.setUserId(m.getIdLong());
-                        user.setId(UUID.randomUUID());
-                        StacyGuildId guildId = new StacyGuildId();
-                        guildId.setGuildId(g.getIdLong());
-
-                        user.setGuildId(guildId);
-                        userRepository.save(user);
-                    }
+                    userRepository.saveUserIfNotExists(UUID.randomUUID(), m.getIdLong(), g.getIdLong());
                 }
 
             }

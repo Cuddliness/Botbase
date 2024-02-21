@@ -1,7 +1,5 @@
 package care.cuddliness.stacy.interaction.button.buttons;
 
-import care.cuddliness.stacy.entities.modules.StacyInterviewQuestion;
-import care.cuddliness.stacy.interaction.InteractionHandler;
 import care.cuddliness.stacy.interaction.button.annotation.StacyButtonComponent;
 import care.cuddliness.stacy.interaction.button.data.ButtonExecutorInterface;
 import care.cuddliness.stacy.repositories.InterviewQuestionRepository;
@@ -19,6 +17,8 @@ public class StartInterview implements ButtonExecutorInterface {
     private InterviewQuestionRepository repository;
     @Override
     public void onExecute(Member clicker, ButtonInteractionEvent event) {
+
+        //TODO: Check if user already sended an interview
         ModalBuilder builder = new ModalBuilder();
         repository.findStacyInterviewQuestionByGuildId(event.getGuild().getIdLong()).forEach(question -> {
             builder.addQuestion(question.getTitle().toLowerCase(), question.getDescription(), "Bwa?", TextInputStyle.PARAGRAPH);
