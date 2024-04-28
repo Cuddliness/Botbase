@@ -1,6 +1,5 @@
 package care.cuddliness.stacy.entities.user;
 
-import care.cuddliness.stacy.entities.guild.StacyGuildId;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
