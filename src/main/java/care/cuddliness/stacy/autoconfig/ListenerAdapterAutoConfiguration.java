@@ -10,8 +10,8 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 @AutoConfigureAfter(JdaAutoConfiguration.class)
 public class ListenerAdapterAutoConfiguration {
 
+    //Automatic registers JDA's listener adapters
     public ListenerAdapterAutoConfiguration(@NotNull ListenerAdapter[] listenerAdapters, JDA jda) {
-
         for (ListenerAdapter listenerAdapter : listenerAdapters) {
             jda.addEventListener(listenerAdapter);
         }

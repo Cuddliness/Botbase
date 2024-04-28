@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class JdaAutoConfiguration {
 
+    //Auto configure the JDA bot builder with credentials stored in the .env file
     @Bean
     @ConditionalOnMissingBean
     public JDA jda() throws LoginException, InterruptedException {
-
         return JDABuilder.createDefault(System.getenv("BOT_TOKEN"))
                 .setStatus(OnlineStatus.ONLINE)
                 .disableCache(CacheFlag.MEMBER_OVERRIDES)
